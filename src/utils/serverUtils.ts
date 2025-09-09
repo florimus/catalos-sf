@@ -13,12 +13,13 @@ type HandlerFunctionProps = (
 export const handleServerProps =
   (handlerFunction: HandlerFunctionProps, pageType: string) =>
   async (ctx: RawPageContext) => {
-    const { locale } = (await ctx.params) || { locale: DEFAULT_LOCALE };
+    const { locale, ...params } = (await ctx.params) || { locale: DEFAULT_LOCALE };
     const language = getLanguage(locale);
     const translation = await getDictionary(language)(pageType);
 
     return await handlerFunction({
       ...ctx,
+      ...params,
       pageType,
       translation,
     });
