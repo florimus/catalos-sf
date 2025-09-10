@@ -5,3 +5,8 @@ export const pageTypes = {
   HOME: 'HOME',
   PDP: 'PDP',
 };
+
+export enum Languages {
+  EN = 'EN',
+  AR = 'AR',
+}

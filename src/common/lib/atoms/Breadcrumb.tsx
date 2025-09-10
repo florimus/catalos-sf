@@ -22,7 +22,7 @@ const Breadcrumb = () => {
               href={item.href}
               className='flex items-center hover:text-gray-700 transition-colors'
             >
-              {idx === 0 && <Home className='w-4 h-4 mr-1' />}
+              {idx === 0 && <Home className='w-4 h-4 me-1' />}
               {item.label}
             </Link>
           ) : (

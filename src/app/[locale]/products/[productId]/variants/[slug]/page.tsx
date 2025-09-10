@@ -7,11 +7,15 @@ import {
 import PdpOverview from '@/components/pdp-overview';
 import { pageTypes } from '@/utils/constants';
 import { handleServerProps } from '@/utils/serverUtils';
+import translate from '@/utils/translationUtils';
 
 const PDPPage = handleServerProps(
-  async ({ translation, ...rest }: PageContext) => {
+  async ({ translation, language, ...rest }: PageContext) => {
     const { productId, slug } = await rest.params;
-    const product: IProductVariantResponse = await getProductById(productId);
+    const product: IProductVariantResponse = await getProductById(
+      productId,
+      language
+    );
 
     const defaultVariant = product?.variants?.find(
       (variant) => variant.slug === slug
@@ -21,7 +25,7 @@ const PDPPage = handleServerProps(
       (variant) => ({
         href: variant.url || '#',
         label: variant.name || '',
-        thumbnail: variant?.medias?.[0] ,
+        thumbnail: variant?.medias?.[0],
         isSelected: variant?.id === defaultVariant?.id,
       })
     );
@@ -30,6 +34,8 @@ const PDPPage = handleServerProps(
       <PdpOverview
         medias={defaultVariant?.medias}
         variantOptions={variantOptions}
+        defaultVariant={defaultVariant}
+        productName={translate({ name: product?.name }, product.translations)}
       />
     );
   },

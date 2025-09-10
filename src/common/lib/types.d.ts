@@ -1,3 +1,5 @@
+import { Languages } from '@/utils/constants';
+
 export type { Locale } from '@i18n/config';
 
 export interface RawPageContext {
@@ -14,6 +16,7 @@ export interface RawPageContext {
 
 export interface PageContext extends RawPageContext {
   translation: Record<string, string>;
+  language: Languages;
 }
 
 export interface ICategory {
