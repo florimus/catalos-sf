@@ -1,18 +1,19 @@
 import { getProductById } from '@/actions/product';
-import { PageContext } from '@/common/lib/types';
+import { IProductVariantResponse, PageContext } from '@/common/lib/types';
+import PdpOverview from '@/components/pdp-overview';
 import { pageTypes } from '@/utils/constants';
 import { handleServerProps } from '@/utils/serverUtils';
 
 const PDPPage = handleServerProps(
   async ({ translation, ...rest }: PageContext) => {
     const { productId, slug } = await rest.params;
-    const product = await getProductById(productId);
-    return (
-      <div>
-        <h1>{translation.title}</h1>
-        <p>{translation.description}</p>
-      </div>
+    const product: IProductVariantResponse = await getProductById(productId);
+
+    const defaultVariant = product?.variants?.find(
+      (variant) => variant.slug === slug
     );
+
+    return <PdpOverview medias={defaultVariant?.medias} />;
   },
   pageTypes.PDP
 );
