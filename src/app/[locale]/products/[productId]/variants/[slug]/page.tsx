@@ -10,7 +10,7 @@ import { handleServerProps } from '@/utils/serverUtils';
 import translate from '@/utils/translationUtils';
 
 const PDPPage = handleServerProps(
-  async ({ translation, language, ...rest }: PageContext) => {
+  async ({ language, ...rest }: PageContext) => {
     const { productId, slug } = await rest.params;
     const product: IProductVariantResponse = await getProductById(
       productId,

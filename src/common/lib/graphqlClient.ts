@@ -3,7 +3,7 @@ import { Languages } from '@/utils/constants';
 // lib/graphqlClient.ts
 export async function graphqlRequest<T>(
   query: string,
-  variables: Record<string, any>,
+  variables: Record<string, unknown>,
   language: Languages = Languages.EN
 ): Promise<T> {
   const res = await fetch(

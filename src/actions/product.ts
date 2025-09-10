@@ -9,7 +9,7 @@ export const getProductById = async (
   productId: string,
   language?: Languages
 ) => {
-  const response = await graphqlRequest<{ getProductById: any }>(
+  const response = await graphqlRequest<{ getProductById: IProductVariantResponse }>(
     GET_PRODUCT_BY_ID,
     {
       id: productId,

@@ -3,6 +3,7 @@ import ImageGallery from './image-gallery';
 import Breadcrumb from '@/common/lib/atoms/Breadcrumb';
 import VariantSelection from './variantSelection';
 import translate from '@/utils/translationUtils';
+import Link from 'next/link';
 
 const PdpOverview = ({
   medias,
@@ -24,16 +25,16 @@ const PdpOverview = ({
         <p className='text-lg text-gray-500 font-bold mb-8'>
           {translate(
             { name: defaultVariant?.name?.toUpperCase() || '' },
-            defaultVariant?.translations!
+            defaultVariant?.translations || {}
           )}
         </p>
         <p className='text-gray-500 text-sm font-light'>
-          <a
+          <Link
             href='/shipping'
             className='font-bold hover:underline text-blue-500'
           >
             Shipping price{' '}
-          </a>
+          </Link>
           calculated at checkout
         </p>
         <div className='flex items-center'>
