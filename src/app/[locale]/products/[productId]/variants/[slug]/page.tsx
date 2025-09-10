@@ -1,5 +1,9 @@
 import { getProductById } from '@/actions/product';
-import { IProductVariantResponse, PageContext } from '@/common/lib/types';
+import {
+  IProductVariantResponse,
+  IVariantOption,
+  PageContext,
+} from '@/common/lib/types';
 import PdpOverview from '@/components/pdp-overview';
 import { pageTypes } from '@/utils/constants';
 import { handleServerProps } from '@/utils/serverUtils';
@@ -13,7 +17,21 @@ const PDPPage = handleServerProps(
       (variant) => variant.slug === slug
     );
 
-    return <PdpOverview medias={defaultVariant?.medias} />;
+    const variantOptions: IVariantOption[] | undefined = product?.variants?.map(
+      (variant) => ({
+        href: variant.url || '#',
+        label: variant.name || '',
+        thumbnail: variant?.medias?.[0] ,
+        isSelected: variant?.id === defaultVariant?.id,
+      })
+    );
+
+    return (
+      <PdpOverview
+        medias={defaultVariant?.medias}
+        variantOptions={variantOptions}
+      />
+    );
   },
   pageTypes.PDP
 );

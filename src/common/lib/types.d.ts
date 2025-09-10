@@ -80,6 +80,13 @@ export interface IProductVariantResponse {
   variants: Partial<IVariant>[];
 }
 
+export interface IVariantOption {
+  href: string;
+  label: string;
+  thumbnail?: IMedia;
+  isSelected: boolean;
+}
+
 export type Locale = 'en-ae' | 'ar-ae';
 
 export type Language = 'en' | 'ar';
