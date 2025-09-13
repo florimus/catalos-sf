@@ -4,6 +4,7 @@ import { getLanguage } from '@/utils/commonUtils';
 import { Locale } from '@/common/lib/types';
 import { Metadata } from 'next';
 import { ImageQualityProvider } from '@/common/context/imageQualityCotext';
+import { GlobalLoaderContextProvider } from '@/common/context/LoaderContext';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -39,7 +40,9 @@ export default async function RootLayout({
   return (
     <html lang={language} dir={dir}>
       <body className={`${poppins.variable} antialiased`}>
-        <ImageQualityProvider>{children}</ImageQualityProvider>
+        <GlobalLoaderContextProvider>
+          <ImageQualityProvider>{children}</ImageQualityProvider>
+        </GlobalLoaderContextProvider>
       </body>
     </html>
   );
