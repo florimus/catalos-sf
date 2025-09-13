@@ -18,7 +18,7 @@ export async function graphqlRequest<T>(
         // "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
       },
       body: JSON.stringify({ query, variables }),
-      cache: 'no-store', // disable caching in Next.js
+      cache: 'no-store',
     }
   );
 

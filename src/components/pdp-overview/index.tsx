@@ -4,17 +4,22 @@ import Breadcrumb from '@/common/lib/atoms/Breadcrumb';
 import VariantSelection from './variantSelection';
 import translate from '@/utils/translationUtils';
 import Link from 'next/link';
+import Price from '@/common/lib/atoms/Price';
+import { Suspense } from 'react';
+import SkuPrice, { SkuPriceSkeleton } from './SkuPrice';
 
 const PdpOverview = ({
   medias,
   variantOptions,
   defaultVariant,
   productName,
+  channel,
 }: {
   medias?: IMedia[];
   productName?: string;
   variantOptions?: IVariantOption[];
   defaultVariant?: Partial<IVariant>;
+  channel: string;
 }) => {
   return (
     <div className='container mx-auto p-5 grid grid-cols-1 md:grid-cols-2 gap-10'>
@@ -37,13 +42,13 @@ const PdpOverview = ({
           </Link>
           calculated at checkout
         </p>
-        <div className='flex items-center'>
-          <p className='text-2xl font-bold my-5'>₹ 11,999 </p>
-          <p className='text-2xl font-light line-through my-5 text-gray-400 mx-5'>
-            ₹ 11,999
-          </p>
-          <p className='font-light text-lg'>(20% Off) </p>
-        </div>
+        {defaultVariant?.skuId && (
+          <Suspense fallback={<SkuPriceSkeleton />}>
+            <Price skuId={defaultVariant?.skuId} channel={channel}>
+              {(price) => <SkuPrice {...price} />}
+            </Price>
+          </Suspense>
+        )}
         <hr className='text-gray-200 my-5' />
         <VariantSelection variantOptions={variantOptions} />
       </div>

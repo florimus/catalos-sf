@@ -9,6 +9,7 @@ type HandlerFunctionProps = (
     pageType: string;
     translation: Record<string, string>;
     language: Languages;
+    channel: string;
   }
 ) => Promise<unknown>;
 
@@ -24,6 +25,7 @@ export const handleServerProps =
     return await handlerFunction({
       ...ctx,
       ...params,
+      channel: '68374ac320d736a89de249a0',
       language: getLanguageFromLocale(locale),
       pageType,
       translation,

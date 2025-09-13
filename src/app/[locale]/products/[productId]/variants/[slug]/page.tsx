@@ -10,7 +10,7 @@ import { handleServerProps } from '@/utils/serverUtils';
 import translate from '@/utils/translationUtils';
 
 const PDPPage = handleServerProps(
-  async ({ language, ...rest }: PageContext) => {
+  async ({ language, channel, ...rest }: PageContext) => {
     const { productId, slug } = await rest.params;
     const product: IProductVariantResponse = await getProductById(
       productId,
@@ -32,6 +32,7 @@ const PDPPage = handleServerProps(
 
     return (
       <PdpOverview
+        channel={channel}
         medias={defaultVariant?.medias}
         variantOptions={variantOptions}
         defaultVariant={defaultVariant}

@@ -17,6 +17,7 @@ export interface RawPageContext {
 export interface PageContext extends RawPageContext {
   translation: Record<string, string>;
   language: Languages;
+  channel: string;
 }
 
 export interface ICategory {
@@ -88,6 +89,18 @@ export interface IVariantOption {
   label: string;
   thumbnail?: IMedia;
   isSelected: boolean;
+}
+
+export interface ISkuPrice {
+  salesPrice: number;
+  discountName: string;
+  discountedPrice: number;
+  discountPercentage: number;
+  discountFlatPrice: number;
+  taxPrice: number;
+  taxValue: number;
+  isFixedTax: boolean;
+  finalPrice: number;
 }
 
 export type Locale = 'en-ae' | 'ar-ae';
