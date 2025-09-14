@@ -32,7 +32,7 @@ const Image = ({
         quality={quality}
         fill
         className={className}
-        fetchPriority="high"
+        fetchPriority="auto"
       />
     </picture>
   );

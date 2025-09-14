@@ -103,6 +103,14 @@ export interface ISkuPrice {
   finalPrice: number;
 }
 
+export interface IModule {
+  id: string;
+  resourceId: string;
+  data: string;
+  translations: Record<string, string>;
+  active: boolean;
+}
+
 export type Locale = 'en-ae' | 'ar-ae';
 
 export type Language = 'en' | 'ar';

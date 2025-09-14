@@ -4,10 +4,12 @@ import {
   IVariantOption,
   PageContext,
 } from '@/common/lib/types';
+const CustomModule = React.lazy(() => import('@/components/custom-module'));
 import PdpOverview from '@/components/pdp-overview';
 import { pageTypes } from '@/utils/constants';
 import { handleServerProps } from '@/utils/serverUtils';
 import translate from '@/utils/translationUtils';
+import React, { Suspense } from 'react';
 
 const PDPPage = handleServerProps(
   async ({ language, channel, ...rest }: PageContext) => {
@@ -31,13 +33,20 @@ const PDPPage = handleServerProps(
     );
 
     return (
-      <PdpOverview
-        channel={channel}
-        medias={defaultVariant?.medias}
-        variantOptions={variantOptions}
-        defaultVariant={defaultVariant}
-        productName={translate({ name: product?.name }, product.translations)}
-      />
+      <>
+        <PdpOverview
+          channel={channel}
+          medias={defaultVariant?.medias}
+          variantOptions={variantOptions}
+          defaultVariant={defaultVariant}
+          productName={translate({ name: product?.name }, product.translations)}
+        />
+        <Suspense>
+          {defaultVariant?.id && (
+            <CustomModule language={language} resourceId={defaultVariant.id} />
+          )}
+        </Suspense>
+      </>
     );
   },
   pageTypes.PDP
