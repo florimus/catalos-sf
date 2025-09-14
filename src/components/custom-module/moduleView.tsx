@@ -1,5 +1,6 @@
 'use client';
 
+import { useImageQuality } from '@/common/context/imageQualityCotext';
 import grapesjs, { Editor } from 'grapesjs';
 import 'grapesjs/dist/css/grapes.min.css';
 import { useEffect, useState } from 'react';
@@ -12,6 +13,8 @@ interface ModuleViewProps {
 
 const ModuleView = ({ data, translations, language }: ModuleViewProps) => {
   let editor: Editor;
+
+  const { quality } = useImageQuality();
 
   const [html, setHtml] = useState<string>('');
   const [css, setCss] = useState<string>('');
@@ -42,12 +45,16 @@ const ModuleView = ({ data, translations, language }: ModuleViewProps) => {
     }
   }, [data]);
 
+  if (quality < 25) {
+    return null;
+  }
+
   if (html) {
     return (
       <div dir={language === 'AR' ? 'rtl' : 'ltr'}>
         <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+          rel='stylesheet'
+          href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
         />
         <style>{css}</style>
 

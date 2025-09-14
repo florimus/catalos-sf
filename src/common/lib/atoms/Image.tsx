@@ -1,8 +1,9 @@
 'use client';
 
-import NextImage from 'next/image';
+const NextImage = lazy(() => import('next/image'));
 import { IMedia } from '../types';
 import { useImageQuality } from '@/common/context/imageQualityCotext';
+import { lazy } from 'react';
 
 interface ImageProps {
   medias: IMedia;
@@ -32,7 +33,7 @@ const Image = ({
         quality={quality}
         fill
         className={className}
-        fetchPriority="auto"
+        fetchPriority="high"
       />
     </picture>
   );

@@ -1,12 +1,9 @@
 import Link from 'next/link';
 import { Home } from 'lucide-react';
+import { IBreadcrumbOption } from '../types';
 
-const Breadcrumb = () => {
-  const items = [
-    { label: 'Home', href: '/' },
-    { label: 'Category', href: '/category' },
-    { label: 'Product', href: '#' },
-  ];
+const Breadcrumb = ({ options }: { options: IBreadcrumbOption[] }) => {
+  const items = [...options];
 
   return (
     <nav
@@ -17,7 +14,7 @@ const Breadcrumb = () => {
         <div key={idx} className='flex items-center'>
           {idx !== 0 && <span className='mx-2 text-gray-400'>/</span>}
 
-          {item.href !== '#' ? (
+          {item.href ? (
             <Link
               href={item.href}
               className='flex items-center hover:text-gray-700 transition-colors'

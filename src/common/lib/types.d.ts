@@ -111,6 +111,11 @@ export interface IModule {
   active: boolean;
 }
 
+export interface IBreadcrumbOption {
+  label: string;
+  href?: string;
+}
+
 export type Locale = 'en-ae' | 'ar-ae';
 
 export type Language = 'en' | 'ar';

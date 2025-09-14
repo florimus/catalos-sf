@@ -3,18 +3,21 @@
 import { useLoader } from '@/common/context/LoaderContext';
 import Image from '@/common/lib/atoms/Image';
 import { IVariantOption } from '@/common/lib/types';
+import { managePath } from '@/utils/localeUtils';
 import { useRouter } from 'next/navigation';
 
 const VariantSelection = ({
   variantOptions,
+  locale,
 }: {
+  locale: string;
   variantOptions?: IVariantOption[];
 }) => {
   const router = useRouter();
   const { start } = useLoader();
 
   const handleVariantClick = (href: string) => {
-    start(() => router.push(href));
+    start(() => router.push(managePath(href, locale)));
   };
 
   if (Array.isArray(variantOptions) && variantOptions.length > 0) {

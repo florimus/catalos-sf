@@ -20,9 +20,9 @@ const PDPPage = handleServerProps(
       language
     );
 
-    const defaultVariant = product?.variants?.find(
-      (variant) => variant.slug === slug
-    ) ;
+    const defaultVariant =
+      product?.variants?.find((variant) => variant.slug === slug) ||
+      product?.variants?.[0];
 
     const variantOptions: IVariantOption[] | undefined = product?.variants?.map(
       (variant) => ({
