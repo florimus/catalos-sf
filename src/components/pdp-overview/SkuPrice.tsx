@@ -2,9 +2,10 @@ interface SkuPriceProps {
   salesPrice?: number;
   discountedPrice?: number;
   discountFlatPrice?: number;
+  defaultTranslations: Record<string, string>;
 }
 
-const SkuPrice = ({ discountFlatPrice, salesPrice }: SkuPriceProps) => {
+const SkuPrice = ({ discountFlatPrice, salesPrice, defaultTranslations }: SkuPriceProps) => {
   if (!salesPrice) {
     return <></>;
   }
@@ -18,7 +19,7 @@ const SkuPrice = ({ discountFlatPrice, salesPrice }: SkuPriceProps) => {
           ₹ {salesPrice}
         </p>
       )}
-      <span className='text-sm text-gray-500 mt-1'>Exc. Tax</span>
+      <span className='text-sm text-gray-500 mt-1'>{defaultTranslations.exc_of_tax}</span>
     </div>
   );
 };

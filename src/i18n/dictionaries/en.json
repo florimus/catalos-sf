@@ -4,6 +4,11 @@
     "description": "This is the home page of our application."
   },
   "PDP": {
-    "home": "Home"
+    "home": "Home",
+    "shipping_price": "Shipping Price",
+    "calculate_at_checkout": "Calculated at checkout",
+    "exc_of_tax": "Excl. of tax",
+    "available_variants": "Available Variant(s)",
+    "add_to_cart": "Add to Cart"
   }
 }

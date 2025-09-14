@@ -7,10 +7,12 @@ import { managePath } from '@/utils/localeUtils';
 import { useRouter } from 'next/navigation';
 
 const VariantSelection = ({
+  defaultTranslations,
   variantOptions,
   locale,
 }: {
   locale: string;
+  defaultTranslations: Record<string, string>;
   variantOptions?: IVariantOption[];
 }) => {
   const router = useRouter();
@@ -23,7 +25,7 @@ const VariantSelection = ({
   if (Array.isArray(variantOptions) && variantOptions.length > 0) {
     return (
       <div>
-        <p className='text-sm text-gray-500'>Available Variant(s)</p>
+        <p className='text-sm text-gray-500'>{defaultTranslations.available_variants}</p>
         <div className='mt-3 flex gap-3 overflow-x-auto'>
           {variantOptions.map((each) => (
             <div

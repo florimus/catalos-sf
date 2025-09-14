@@ -41,7 +41,7 @@ const ModuleView = ({ data, translations, language }: ModuleViewProps) => {
       setHtml(editor.getHtml());
       setCss(editor.getCss() || '');
     } catch (error) {
-      console.log("GrapesJS couldn't be initialized", error);
+      console.warn("GrapesJS couldn't be initialized", error);
     }
   }, [data]);
 

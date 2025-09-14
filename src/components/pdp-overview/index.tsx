@@ -18,6 +18,7 @@ const PdpOverview = ({
   variantOptions,
   defaultVariant,
   breadcrumbOptions,
+  defaultTranslations,
   productName,
   channel,
   locale,
@@ -28,6 +29,7 @@ const PdpOverview = ({
   defaultVariant?: Partial<IVariant>;
   channel: string;
   locale: string;
+  defaultTranslations: Record<string, string>;
   breadcrumbOptions: IBreadcrumbOption[];
 }) => {
   return (
@@ -50,22 +52,31 @@ const PdpOverview = ({
               href='/shipping'
               className='font-bold hover:underline text-blue-500'
             >
-              Shipping price{' '}
+              {defaultTranslations?.shipping_price}{' '}
             </Link>
-            calculated at checkout
+            {defaultTranslations?.calculate_at_checkout}
           </p>
           {defaultVariant?.skuId && (
             <Suspense fallback={<SkuPriceSkeleton />}>
               <Price skuId={defaultVariant?.skuId} channel={channel}>
-                {(price) => <SkuPrice {...price} />}
+                {(price) => (
+                  <SkuPrice
+                    {...price}
+                    defaultTranslations={defaultTranslations}
+                  />
+                )}
               </Price>
             </Suspense>
           )}
         </div>
         <hr className='text-gray-200 my-5' />
-        <VariantSelection variantOptions={variantOptions} locale={locale} />
-        <button className='w-full bg-blue-900 text-white py-3 mt-5 font-bold hover:bg-blue-700 rounded-lg'>
-          Add to Cart
+        <VariantSelection
+          variantOptions={variantOptions}
+          locale={locale}
+          defaultTranslations={defaultTranslations}
+        />
+        <button className='w-full bg-blue-900 text-white py-3 mt-5 font-bold hover:bg-blue-800 rounded-lg'>
+          {defaultTranslations?.add_to_cart}
         </button>
       </div>
     </div>

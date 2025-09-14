@@ -33,8 +33,6 @@ const PDPPage = handleServerProps(
       })
     );
 
-    console.log(product?.category?.translations);
-
     const breadcrumbOptions: IBreadcrumbOption[] = [
       {
         label: translation.home,
@@ -64,6 +62,7 @@ const PDPPage = handleServerProps(
           defaultVariant={defaultVariant}
           breadcrumbOptions={breadcrumbOptions}
           locale={locale}
+          defaultTranslations={translation}
           productName={translate({ name: product?.name }, product.translations)}
         />
         <Suspense>

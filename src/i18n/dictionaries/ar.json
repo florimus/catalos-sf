@@ -4,6 +4,11 @@
     "description": "هذه الصفحة هي الصفحة الرئيسية لتطبيقنا."
   },
   "PDP": {
-    "home": "بيت"
+    "home": "بيت",
+    "shipping_price": "سعر الشحن",
+    "calculate_at_checkout": "يحسب عند الدفع",
+    "exc_of_tax": "باستثناء الضريبة",
+    "available_variants": "النوع (الأنواع) المتاحة",
+    "add_to_cart": "أضف إلى السلة"
   }
 }
