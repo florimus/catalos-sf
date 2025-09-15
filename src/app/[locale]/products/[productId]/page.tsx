@@ -1,10 +1,12 @@
 import { getProductById } from '@/actions/product';
 import {
+  AttributeInfoItem,
   IBreadcrumbOption,
   IProductVariantResponse,
   IVariantOption,
   PageContext,
 } from '@/common/lib/types';
+import ProductAttributes from '@/components/pdp-attributes';
 const CustomModule = React.lazy(() => import('@/components/custom-module'));
 import PdpOverview from '@/components/pdp-overview';
 import { pageTypes } from '@/utils/constants';
@@ -53,6 +55,69 @@ const PDPPage = handleServerProps(
       },
     ];
 
+    const productAttributes: AttributeInfoItem[] = Object.keys(product?.attributes).map((key) => {
+      const label = translate(
+        { [key]: key },
+        product.productType?.translations || {}
+      );
+
+      let value = null;
+
+      const attribute = product?.attributes[key];
+      if (attribute.type === 'Boolean') {
+        value = attribute.value ? 'Yes' : 'No';
+      } else {
+        value = translate(
+          { [key]: product?.attributes?.[key]?.value as string },
+          product?.translations
+        );
+      }
+
+      return {
+        label,
+        value,
+      };
+    });
+
+    const variantAttributes: AttributeInfoItem[] = Object.keys(
+      defaultVariant?.attributes || {}
+    ).map((key) => {
+      const label = translate(
+        { [key]: key },
+        product.productType?.translations || {}
+      );
+
+      let value = null;
+
+      const attribute = defaultVariant?.attributes?.[key] || {
+        type: '',
+        value: '',
+      };
+
+      if (attribute.type === 'Boolean') {
+        value = attribute.value ? 'Yes' : 'No';
+      } else if (attribute.type === 'Select') {
+        const currentOption = attribute.value as {
+          label: string;
+          value: string;
+        };
+        value = translate(
+          { [key]: (currentOption?.value as string) || '' },
+          defaultVariant?.translations || {}
+        );
+      } else {
+        value = translate(
+          { [key]: (defaultVariant?.attributes?.[key]?.value as string) || '' },
+          defaultVariant?.translations || {}
+        );
+      }
+
+      return {
+        label,
+        value,
+      };
+    });
+
     return (
       <>
         <PdpOverview
@@ -65,6 +130,7 @@ const PDPPage = handleServerProps(
           productName={translate({ name: product?.name }, product.translations)}
           defaultTranslations={translation}
         />
+        <ProductAttributes productInfo={productAttributes} variantInfo={variantAttributes} />
         <Suspense>
           {defaultVariant?.id && (
             <CustomModule language={language} resourceId={defaultVariant.id} />

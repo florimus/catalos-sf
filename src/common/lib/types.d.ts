@@ -42,7 +42,7 @@ export interface IProductType {
 export interface IAttributeValue {
   type: string;
   options: null;
-  value: string;
+  value: string | { label: string; value: string } | boolean | number;
 }
 
 export interface IMedia {
@@ -114,6 +114,11 @@ export interface IModule {
 export interface IBreadcrumbOption {
   label: string;
   href?: string;
+}
+
+export interface AttributeInfoItem {
+  label: string;
+  value: string;
 }
 
 export type Locale = 'en-ae' | 'ar-ae';

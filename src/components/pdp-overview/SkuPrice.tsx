@@ -19,7 +19,7 @@ const SkuPrice = ({ discountFlatPrice, salesPrice, defaultTranslations }: SkuPri
           ₹ {salesPrice}
         </p>
       )}
-      <span className='text-sm text-gray-500 mt-1'>{defaultTranslations.exc_of_tax}</span>
+      <span className='text-sm text-gray-500 mt-1 mx-3'>{defaultTranslations.exc_of_tax}</span>
     </div>
   );
 };

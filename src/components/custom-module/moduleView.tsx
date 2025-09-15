@@ -51,7 +51,7 @@ const ModuleView = ({ data, translations, language }: ModuleViewProps) => {
 
   if (html) {
     return (
-      <div dir={language === 'AR' ? 'rtl' : 'ltr'}>
+      <div dir={language === 'AR' ? 'rtl' : 'ltr'} className='my-10'>
         <link
           rel='stylesheet'
           href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
