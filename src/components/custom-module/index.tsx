@@ -8,7 +8,7 @@ interface CustomModuleProps {
 }
 
 const CustomModule = async ({ language, resourceId }: CustomModuleProps) => {
-  const moduleResponse: IModule = await getModuleById(resourceId);
+  const moduleResponse: IModule | undefined = await getModuleById(resourceId);
 
   if (!moduleResponse) {
     return null;

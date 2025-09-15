@@ -68,6 +68,15 @@ const PDPPage = handleServerProps(
       const attribute = product?.attributes[key];
       if (attribute.type === 'Boolean') {
         value = attribute.value ? 'Yes' : 'No';
+      } else if (attribute.type === 'Select') {
+        const currentOption = attribute.value as {
+          label: string;
+          value: string;
+        };
+        value = translate(
+          { [key]: currentOption?.value || '' },
+          product?.translations || {}
+        );
       } else {
         value = translate(
           { [key]: product?.attributes?.[key]?.value as string },
